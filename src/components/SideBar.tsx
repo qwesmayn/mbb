@@ -39,7 +39,7 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
     <div
       className={`w-72 bg-white text-gray-500 p-6 min-h-screen ${
         isSidebarOpen ? "block fixed top-0 left-0 z-50 bottom-0 w-72" : "hidden"
-      } sm:block`}
+      } lg:block`}
     >
       {isSidebarOpen && (
         <div className="flex justify-end mb-4">

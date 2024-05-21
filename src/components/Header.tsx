@@ -14,25 +14,25 @@ const Header : FC<HeaderProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     <Disclosure as="nav" className="bg-white border w-full h-16">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <AdjustmentsHorizontalIcon className="h-6 w-6" />
             </div>
           </div>
           {/* Иконка бургер-меню в левом краю */}
-          <div className="absolute inset-y-0 left-0 flex items-center pl-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
             <button
               type="button"
-              className="block sm:hidden text-gray-400 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="block lg:hidden text-gray-400 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               onClick={() => setSidebarOpen(!isSidebarOpen)}
             >
               <Bars3Icon className="h-6 w-6 text-gray-600" />
             </button>
           </div>
           {/* Содержимое заголовка */}
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
             {/* Показывать только для устройств типа sm */}
-            <div className="hidden sm:block">
+            <div className="hidden lg:block">
               <button
                 type="button"
                 className="relative rounded-full p-1 text-gray-400 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
