@@ -5,6 +5,7 @@ import { IChat } from "../models/IChat";
 import ChatList from "../components/ChatList";
 import Dialog from "../components/Dialog";
 import BreadCrumb from "../components/BreadCrumb";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const currentUserID = 1;
 
@@ -13,7 +14,7 @@ const users: IUser[] = [
     id: 1,
     username: "user1",
     avatar:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     role: "User",
   },
   {
@@ -88,7 +89,7 @@ const chats: IChat[] = [
   {
     id: 1,
     participants: [1, 2],
-    messages: [1, 2, 3, 4, 5, 6, 7, 7,7],
+    messages: [1, 2, 3, 4, 5, 6, 7, 7, 7],
   },
   {
     id: 2,
@@ -144,7 +145,9 @@ const ChatPage: FC = () => {
     setSelectedChatId(chatId);
   };
 
-  const filteredChats = chats.filter((chat) => chat.participants.includes(currentUserID));
+  const filteredChats = chats.filter((chat) =>
+    chat.participants.includes(currentUserID)
+  );
 
   return (
     <div className="pl-8 pt-8 pr-6 h-full flex flex-col">
@@ -154,17 +157,33 @@ const ChatPage: FC = () => {
       </div>
       <div className="flex-grow">
         {selectedChatId === null ? (
-          <ChatList chats={filteredChats} users={users} onChatSelect={handleChatSelect} />
-        ) : (
-          <Dialog
-            messages={(
-              chats.find((chat) => chat.id === selectedChatId)?.messages || []
-            )
-              .map((messageId) => messages.find((msg) => msg.id === messageId))
-              .filter((message): message is IMessage => message !== undefined)}
+          <ChatList
+            chats={filteredChats}
             users={users}
-            currentUserID={currentUserID}
+            onChatSelect={handleChatSelect}
           />
+        ) : (
+          <>
+            <button
+              className=" bg-blue-500 text-white px-4 py-2 rounded-lg absolute top-48"
+              onClick={() => setSelectedChatId(null)}
+            >
+              <ArrowLeftIcon className="h-5 w-5" />
+            </button>
+            <Dialog
+              messages={(
+                chats.find((chat) => chat.id === selectedChatId)?.messages || []
+              )
+                .map((messageId) =>
+                  messages.find((msg) => msg.id === messageId)
+                )
+                .filter(
+                  (message): message is IMessage => message !== undefined
+                )}
+              users={users}
+              currentUserID={currentUserID}
+            />
+          </>
         )}
       </div>
     </div>

@@ -21,7 +21,7 @@ const ChatList: FC<ChatListProps> = ({ chats, users, onChatSelect }) => {
               key={chat.id}
               onClick={() => onChatSelect(chat.id)}
               style={{ cursor: "pointer" }}
-              className="flex justify-between gap-x-6 pl-7 py-2"
+              className="flex justify-between gap-x-6 py-2 sm:pl-7"
             >
               <div className="flex items-center min-w-0 gap-x-4">
                 <img

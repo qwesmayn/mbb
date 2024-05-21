@@ -92,7 +92,7 @@ const Support: FC = () => {
           {selectedUser ? (
             <div className="flex flex-col h-full">
               <div className="flex items-center px-5 py-5 shadow bg-white">
-                <button
+              <button
                   className="xl:hidden bg-blue-500 text-white px-4 py-2 rounded-lg mr-4"
                   onClick={() => setSelectedUser(null)}
                 >

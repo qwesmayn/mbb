@@ -1,8 +1,6 @@
 import React, { FC, useState } from "react";
-import { Disclosure } from "@headlessui/react";
-import logo from "../static/img/logo.png"
+import logo from "../static/img/logo.png";
 import {
-  ChevronDownIcon,
   HomeIcon,
   WalletIcon,
   BanknotesIcon,
@@ -14,6 +12,7 @@ import {
   QuestionMarkCircleIcon,
   PhotoIcon,
   XMarkIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -31,9 +30,10 @@ type Props = {
 };
 
 const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
-  const [isDashboardOpen, setDashboardOpen] = useState(false);
+  const [isDashboardOpen, setDashboardOpen] = useState(true);
   const [isAboutOpen, setAboutOpen] = useState(false);
   const url = useLocation();
+
 
   return (
     <div
@@ -51,13 +51,14 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
 
       <h1 className="text-2xl font-medium text-black w-max mb-8">
         <NavLink to={MAIN_ROUTE}>
-          <img src={logo} className="h-8"/>
+          <img src={logo} className="h-8" />
         </NavLink>
       </h1>
-      <Disclosure as="div" className="mb-6">
-        <Disclosure.Button
+
+      <div className="mb-6">
+        <div
+          className="flex justify-between items-center cursor-pointer"
           onClick={() => setDashboardOpen(!isDashboardOpen)}
-          className="w-full flex justify-between items-center"
         >
           <h4 className="text-xs">ДАШБОРД</h4>
           <ChevronDownIcon
@@ -65,13 +66,9 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
               isDashboardOpen ? "transform rotate-180" : ""
             }`}
           />
-        </Disclosure.Button>
-        <Disclosure.Panel
-          className={`transition-height duration-200 overflow-hidden ${
-            isDashboardOpen ? "h-auto" : "h-0"
-          }`}
-        >
-          <ul>
+        </div>
+        {isDashboardOpen && (
+          <ul onClick={() => setSidebarOpen(false)}>
             <li
               className={`mb-5 mt-5 ${
                 url.pathname === MAIN_ROUTE ? "text-blue-400" : ""
@@ -113,12 +110,13 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
               <NavLink to={SUPPORT_ROUTE}>Служба поддержки</NavLink>
             </li>
           </ul>
-        </Disclosure.Panel>
-      </Disclosure>
-      <Disclosure>
-        <Disclosure.Button
+        )}
+      </div>
+
+      <div>
+        <div
+          className="flex items-center justify-between cursor-pointer"
           onClick={() => setAboutOpen(!isAboutOpen)}
-          className="w-full flex justify-between items-center"
         >
           <h2 className="text-xs">О НАС</h2>
           <ChevronDownIcon
@@ -126,13 +124,10 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
               isAboutOpen ? "transform rotate-180" : ""
             }`}
           />
-        </Disclosure.Button>
-        <Disclosure.Panel
-          className={`transition-height duration-200 overflow-hidden ${
-            isAboutOpen ? "h-auto" : "h-0"
-          }`}
-        >
-          <ul>
+        </div>
+
+        {isAboutOpen && (
+          <ul onClick={() => setSidebarOpen(false)}>
             <li className="mb-5 mt-5">
               <MapIcon className="h-5 w-5 inline-block mr-2" />
               Карта проекта
@@ -141,9 +136,12 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
               <TrophyIcon className="h-5 w-5 inline-block mr-2" />
               Наши достижения
             </li>
-            <li className="mb-5">
+            <li
+              className={`mb-5 ${
+                url.pathname === CHAT_ROUTE ? "text-blue-400" : ""
+              }`}
+            >
               <NavLink to={CHAT_ROUTE}>
-                {" "}
                 <ChatBubbleLeftRightIcon className="h-5 w-5 inline-block mr-2" />
                 Чат
               </NavLink>
@@ -157,8 +155,8 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, setSidebarOpen }) => {
               Медиа галерея
             </li>
           </ul>
-        </Disclosure.Panel>
-      </Disclosure>
+        )}
+      </div>
     </div>
   );
 };
